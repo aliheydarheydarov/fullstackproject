@@ -1,4 +1,3 @@
-const { v4: uuidv4 } = require("uuid");
 const mysql=require("mysql2");
 const connection= require("./../config/dbsql")
 
@@ -18,10 +17,9 @@ const getAllProducts = async (req, res) => {
 
 const registerProduct= async (req, res) =>{
     const { image , title, price, description } = req.body; 
-    const id = uuidv4();
 
   // Insert the new student into the database
-  connection.query('INSERT INTO products (id, image, title, price, description) VALUES (?, ?, ?, ?, ?)', [id, image, title, price, description], (err, results) => {
+  connection.query('INSERT INTO products ( image, title, price, description) VALUES ( ?, ?, ?, ?)', [ image, title, price, description], (err, results) => {
     if (err) {
       console.error('Error executing query:', err);
       res.status(500).send('Error inserting product');
