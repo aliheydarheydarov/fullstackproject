@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="./assets/style/admin.css" />
+</head>
+<body id="admin-content">
+  <header>
+    <h1>Admin Dashboard</h1>
+    <nav>
+      <ul>
+        <li><a href="#add-product">Add Product</a></li>
+        <!-- <li><a href="#edit-product">Edit Product</a></li> -->
+        <!-- <li><a href="#add-user">Add User</a></li> -->
+        <li><a href="#edit-user">Edit User</a></li>
+        <li><a href="#delete-user">Delete User</a></li>
+        <li><a href="./index.html">Go to Home</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="add-product">
+      <h2>Add Product</h2>
+      <form id="addProductForm">
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" name="title" required>
+        <label for="productImageLink">Product Image Link:</label>
+        <input type="text" id="productImageLink" name="image" required>
+        <label for="productPrice">Price:</label>
+        <input type="number" id="productPrice" name="price" step="0.01" required>
+        <label for="productDescription">Description:</label>
+        <textarea id="productDescription" name="description"></textarea>
+        <button type="submit">Add Product</button>
+      </form>
+    </section>
+
+    <!-- <section id="edit-product">
+      <h2>Edit Product</h2>
+      <form id="editProductForm">
+        <label for="productId">Product ID:</label>
+        <input type="text" id="productId" name="productId" required>
+        <label for="newProductName">New Name:</label>
+        <input type="text" id="newProductName" name="newProductName">
+        <label for="newProductPrice">New Price:</label>
+        <input type="number" id="newProductPrice" name="newProductPrice" step="0.01">
+        <label for="newProductDescription">New Description:</label>
+        <textarea id="newProductDescription" name="newProductDescription"></textarea>
+        <button type="submit">Update Product</button>
+      </form>
+    </section> -->
+
+
+
+    <section id="edit-user">
+      <h2>Edit User</h2>
+      <form id="editUserForm">
+        <label for="username">Enter Username:</label>
+        <input type="text" id="userId" name="username" required>
+        <label for="newIsAdmin">Make Admin:</label>
+        <input type="checkbox" id="newIsAdmin" name="isAdmin">
+        <button type="submit">Update User</button>
+      </form>
+    </section>
+
+    <section id="delete-user">
+      <h2>Delete User</h2>
+      <form id="deleteUserForm">
+        <label for="deleteUserId">Username:</label>
+        <input type="text" id="deleteUserId" name="deleteUserId" required>
+        <button type="submit">Delete User</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="./assets/js/admin.js" type="module"></script>
+
+</body>
+</html>

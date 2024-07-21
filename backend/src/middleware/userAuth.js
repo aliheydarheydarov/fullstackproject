@@ -38,6 +38,7 @@ const verifyToken = (req, res, next) => {
 const verifyToken2 = (req, res) => {
     const token = req.header('Authorization').split(' ')[1];
     console.log("hello");
+    console.log(token);
   
     if (!token) {
       return res.status(401).json({ valid: "not valid" });
@@ -45,7 +46,9 @@ const verifyToken2 = (req, res) => {
   
     try {
       const decoded = jwt.verify(token, process.env.ACCESS_TOKEN);
-      return res.json({ valid: true, isAdmin: decoded.isAdmin });
+      console.log(decoded);
+      
+      return res.json({ valid: true, isAdmin: decoded.isAdmin, userId: decoded['user.id']} );
     } catch (error) {
       console.log(error);
   

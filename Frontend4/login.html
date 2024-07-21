@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="./assets/style/login.css" />
+
+</head>
+<body>
+    <nav>
+        <ul>
+            <li>
+                <a href="./index.html"><i class="fas fa-home"></i> Home</a>
+            </li>
+            <li>
+                <a href="./basket.html"><i class="fas fa-shopping-basket"></i> Basket</a>
+            </li>
+            <li>
+                <a href="./favorites.html"><i class="fas fa-heart"></i> Favorites</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="login-container">
+        <form class="login-form" id="login-form">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="nameInp" id="name" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="passInp" id="password" required />
+            </div>
+            <input type="submit" id="login-submit" class="submit-btn" value="Login" />
+            <button class="btn register-btn">
+                <a href="register.html">Go to Register</a>
+            </button>
+        </form>
+    </div>
+    <script type="module" src="./assets/js/login.js"></script>
+    <script src="./assets/js/script.js" type="module"></script>
+</body>
+</html>

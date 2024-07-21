@@ -40,10 +40,11 @@ const createTableBaskets = () => {
     CREATE TABLE IF NOT EXISTS baskets (
       id INT AUTO_INCREMENT PRIMARY KEY,
       user_id VARCHAR(255) NOT NULL,
-      product_id VARCHAR(255) NOT NULL,
+      product_id INT NOT NULL,
       quantity INT NOT NULL
     )
   `;
+  
 
   connection.query(query, (err, results) => {
     if (err) {

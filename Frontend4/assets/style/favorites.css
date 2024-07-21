@@ -1,0 +1,110 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+nav {
+  background-color: #4CAF50;
+  padding: 1rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0 1rem;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+ 
+    color: #ffeb3b;
+  
+}
+
+.favoritesContainer {
+  text-align: center;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+}
+
+h1 {
+  color: #4CAF50;
+  margin-bottom: 1.5rem;
+}
+
+.favoritesItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.favoritesItems .item {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  width: 200px;
+  transition: transform 0.3s;
+  position: relative;
+}
+
+.favoritesItems .item:hover {
+  transform: translateY(-10px);
+}
+
+.favoritesItems .item img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.favoritesItems .item h3 {
+  margin: 0.5rem 0;
+  color: #4CAF50;
+}
+
+.favoritesItems .item p {
+  color: #777;
+}
+
+.favoritesItems .item .delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.favoritesItems .item .addBasket {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}

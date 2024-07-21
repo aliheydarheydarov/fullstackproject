@@ -11,14 +11,14 @@ const getAllUser = async (req, res) => {
   };
 
 
-const addUser= async (req, res) =>{
-    let obj= req.body;
-    obj.id= uuidv4();
-    const user= await new User({...obj});
-    await user.save();
-    const data=await User.find();
-    res.status(200).send({ message: "success", data: data});
-}
+// const addUser= async (req, res) =>{
+//     let obj= req.body;
+//     obj.id= uuidv4();
+//     const user= await new User({...obj});
+//     await user.save();
+//     const data=await User.find();
+//     res.status(200).send({ message: "success", data: data});
+// }
 
 const getUserById = async (req, res) => {
     const { id } = req.params;
@@ -49,14 +49,42 @@ const getUserById = async (req, res) => {
     
   };
 
-  const patchUser = async (req, res) => {
-    const { id } = req.params;
-    let obj = req.body;
+  const deleteUserByUsername = async (req, res) => {
+    const { username } = req.params;
   
-    let user = await User.findOneAndUpdate({ id: id }, { ...obj },{new: true});
+    if (await User.findOneAndDelete({ username: username })){
   
-    res.status(200).send({ message: "success", data: user });
+    res.status(200).send("deleted");
+  }
+    else{
+      
+      res.status(404).send("user not found");}
+
+    
   };
+
+  const patchUser = async (req, res) => {
+    try {
+        const { username } = req.body; // Assuming username is provided in the request body
+        if (!username) {
+            return res.status(400).send({ message: "Username is required" });
+        }
+
+        const updatedUser = await User.findOneAndUpdate({ username }, req.body, { new: true });
+
+        if (!updatedUser) {
+            return res.status(404).send({ message: "User not found" });
+        }
+
+        res.status(200).send({ message: "success", data: updatedUser });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "Server error", error: error.message });
+    }
+};
+
+module.exports = patchUser;
+
   
   const loginUser = async (req, res) => {
     const obj = req.body;
@@ -78,9 +106,14 @@ const getUserById = async (req, res) => {
   const registerUser = async (req, res) => {
     try {
       const obj = req.body;
-      const existingUser = await User.findOne({ username: obj.username });
-      if (existingUser) {
+      const existingUsername = await User.findOne({ username: obj.username });
+      const existingEmail = await User.findOne({ email: obj.email });
+
+      if (existingUsername ) {
         return res.status(400).json({ error: "Username already exists" });
+      }
+      if (existingEmail ) {
+        return res.status(401).json({ error: "This email is already used" });
       }
       obj.id = uuidv4();
       // Create a new user instance
@@ -97,11 +130,12 @@ const getUserById = async (req, res) => {
 
 module.exports={
     getAllUser,
-    addUser,
+    //addUser,
     getUserById,
     deleteUserById,
     patchUser,
     loginUser,
     registerUser,
+    deleteUserByUsername,
   
 }
