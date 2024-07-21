@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="./assets/style/login.css" />
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li>
+          <a href="./index.html">Home</a>
+        </li>
+       
+        <li>
+          <a href="./basket.html">Basket</a>
+        </li>
+        <li>
+          <a href="./favorites.html">Favorites</a>
+        </li>
+   
+
+      </ul>
+    </nav>
+    <div class="login-container">
+      <form action="" class="login-form">
+        <h2>Login</h2>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="nameInp" id="name" />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="passInp" id="password" />
+        </div>
+        <input type="submit" id="login-submit" class="submit-btn" value="Login" />
+        <button class="btn register-btn" id="registerButton">Go to Register</button>
+      </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./assets/js/api/api.js" type="module"></script>
+    <script type="module" src="./assets/js/login.js"></script>
+    <script src="./assets/js/script.js" type="module"></script>
+
+  </body>
+</html>
