@@ -7,7 +7,7 @@
 
 export const getData = async () => {
   try {
-    const response = await fetch("http://localhost:3000/products");
+    const response = await fetch("http://104.248.136.206:3000/products");
     
     // Check if the response is ok (status in the range 200-299)
     if (!response.ok) {

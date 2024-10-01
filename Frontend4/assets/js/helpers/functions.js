@@ -57,7 +57,7 @@ const addToBasket = async (productId) => {
     const { userId } = await verifyToken(localStorage.getItem('accessToken'));
 
     
-    const response = await fetch('http://localhost:3000/baskets/', {
+    const response = await fetch('http://104.248.136.206:3000/baskets/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -202,7 +202,7 @@ const updateBasket = async (productId, count) => {
   try {
     const { userId } = await verifyToken(localStorage.getItem('accessToken'));
 
-    const response = await fetch('http://localhost:3000/baskets/update', {
+    const response = await fetch('http://104.248.136.206:3000/baskets/update', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -231,7 +231,7 @@ const removeFromBasket = async (productId) => {
   try {
     const { userId } = await verifyToken(localStorage.getItem('accessToken'));
 
-    const response = await fetch(`http://localhost:3000/baskets/${userId}/${productId}`, {
+    const response = await fetch(`http://104.248.136.206:3000/baskets/${userId}/${productId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 export async function verifyToken(token) {
   try {
-    const response = await fetch('http://localhost:3000/users/verifyToken', {
+    const response = await fetch('http://104.248.136.206:3000/users/verifyToken', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
