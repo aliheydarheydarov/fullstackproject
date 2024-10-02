@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
           password: passInp.value,
       };
 
-      fetch('http://104.248.136.206:3000/users/login', {
+      fetch('http://localhost:3000/users/login', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -21,7 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .then(response => {
           if (!response.ok) {
-              throw new Error('Network response was not ok ' + response.statusText);
+ alert('username or password is incorrect');
+             throw new Error('Network response was not ok ' + response.statusText);
+//		
           }
           return response.json(); // Parse JSON from the response
       })

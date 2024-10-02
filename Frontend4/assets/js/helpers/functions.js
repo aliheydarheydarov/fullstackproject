@@ -52,32 +52,41 @@ export const createCard = (parentElement, array) => {
 };
 
 const addToBasket = async (productId) => {
+
+    try {
+      // Simulate getting the userId from a token
+      const { userId } = await verifyToken(localStorage.getItem('accessToken'));
   
-  try {
-    const { userId } = await verifyToken(localStorage.getItem('accessToken'));
-
-    
-    const response = await fetch('http://104.248.136.206:3000/baskets/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user_id: userId, 
-        product_id: productId,
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to add to basket');
+      // Construct an XML body with the user and product information
+      const xmlData = `<?xml version="1.0" encoding="UTF-8"?>
+        <basket>
+          <user_id>${userId}</user_id>
+          <product_id>${productId}</product_id>
+        </basket>
+      `;
+  
+      // Make the request with XML data
+      const response = await fetch('http://localhost:3000/baskets/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/xml', // Set content type to XML
+        },
+        body: xmlData // Send the XML data in the request body
+      });
+  
+      // Check if the request was successful
+      if (!response.ok) {
+        throw new Error(response);
+      }
+  
+      // Notify the user of success
+      alert('Product added to basket successfully');
+  
+    } catch (error) {
+      console.error('Error adding to basket:', error);
     }
-
-    alert('Product added to basket successfully');
-
-  } catch (error) {
-    console.error('Error adding to basket:', error);
-  }
-};
+  };
+  
 
 
 const addToFavorites = (item) => {
@@ -202,7 +211,7 @@ const updateBasket = async (productId, count) => {
   try {
     const { userId } = await verifyToken(localStorage.getItem('accessToken'));
 
-    const response = await fetch('http://104.248.136.206:3000/baskets/update', {
+    const response = await fetch('http://localhost:3000/baskets/update', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -231,7 +240,7 @@ const removeFromBasket = async (productId) => {
   try {
     const { userId } = await verifyToken(localStorage.getItem('accessToken'));
 
-    const response = await fetch(`http://104.248.136.206:3000/baskets/${userId}/${productId}`, {
+    const response = await fetch(`http://localhost:3000/baskets/${userId}/${productId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

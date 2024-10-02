@@ -1,0 +1,3 @@
+# Disallow search engines from accessing private files
+Disallow: /backend/.env
+

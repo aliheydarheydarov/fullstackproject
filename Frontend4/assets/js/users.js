@@ -6,7 +6,7 @@ const users = document.querySelector(".users");
 // console.log(user, "user");
 
 axios
-  .get("http://104.248.136.206:3000/users/", {
+  .get("http://localhost:3000/users/", {
     headers: {
       Authorization: `Bearer ${JSON.parse(
         localStorage.getItem("accessToken")

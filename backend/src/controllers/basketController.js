@@ -1,6 +1,8 @@
+
 const mysql=require("mysql2");
 const connection= require("./../config/dbsql")
-
+const libxmljs = require('libxmljs');
+const fs = require('fs');
 
 
 
@@ -28,31 +30,55 @@ const userBaskets = async (req, res) => {
 //   connection.query('INSERT INTO baskets (user_id, product_id, quantity) VALUES (?, ?, ?)', [user_id, product_id, quantity], (err, results) => {
 //     if (err) {
 //       console.error('Error executing query:', err);
-//       res.status(500).send('Error inserting product');
+//       res.status(500).send('Error inserting product:', err);
 //       return;
 //     }
 //     res.status(201).send('Added to basket successfully');
 // })
 // };
 
-const addToBasket = async (req, res) => {
-  const { user_id, product_id } = req.body;
 
-  // SQL query to insert or update the quantity
-  const sql = `
-    INSERT INTO baskets (user_id, product_id, quantity)
-    VALUES (?, ?, 1)
-    ON DUPLICATE KEY UPDATE quantity = quantity + 1
-  `;
 
-  // Execute the query
-  connection.query(sql, [user_id, product_id], (err, results) => {
-    if (err) {
-      console.error('Error executing query:', err);
-      res.status(500).send('Error inserting/updating product in basket');
-      return;
+
+
+const addToBasket = (req, res) => {
+  let xmlData = '';
+
+  // Listen for data chunks
+  req.on('data', chunk => {
+    xmlData += chunk; // Accumulate data chunks
+  });
+
+  req.on('end', () => {
+    try {
+      // Parse the XML using libxmljs and allow external entities
+      const xmlDoc = libxmljs.parseXml(xmlData, { noent: true });
+
+      // Extract data from the parsed XML body
+      const user_id = xmlDoc.get('//user_id').text();
+      const product_id = xmlDoc.get('//product_id').text();
+
+      // SQL query to insert or update the quantity
+      const sql = `
+        INSERT INTO baskets (user_id, product_id, quantity)
+        VALUES (?, ?, 1)
+        ON DUPLICATE KEY UPDATE quantity = quantity + 1
+      `;
+
+      // Execute the query
+      connection.query(sql, [user_id, product_id], (err, results) => {
+        if (err) {
+          console.error('Error executing query:', err);
+//          res.status(500).send('Error inserting/updating product in basket:', err);
+		res.status(500).send({error: err, stack: err.stack});
+          return;
+        }
+        res.status(201).send('Added to basket successfully');
+      });
+    } catch (err) {
+      console.error('XML parsing error:', err);
+      return res.status(400).send('Invalid XML');
     }
-    res.status(201).send('Added to basket successfully');
   });
 };
 

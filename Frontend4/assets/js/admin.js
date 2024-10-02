@@ -1,32 +1,41 @@
-
 import { verifyToken } from './script.js';
-
 
 document.addEventListener('DOMContentLoaded', async () => {
 
+  // Prevent rendering the page until admin check is done
+  document.body.style.display = 'none'; // Hide the page content initially
+
   const token = localStorage.getItem('accessToken');
-  let isItAdmin= false;
+  let isItAdmin = false;
 
   if (token) {
     try {
       const { isAdmin } = await verifyToken(token);
-      isItAdmin=isAdmin;
-      
+      isItAdmin = isAdmin;
       console.log(isAdmin); // Should print the validity of the token
-       
     } catch (error) {
       console.error('Error verifying token:', error);
       // Handle errors if needed
     }
   }
-  if(isItAdmin){
+
+  // If the user is not an admin, block access and redirect
+  if (!isItAdmin) {
+    window.location.href = '/403.html'; // Redirect to 403 error page
+    return;
+  }
+
+  // If the user is an admin, show the page content
+  document.body.style.display = 'block';
+
+  // If the user is an admin, the rest of the code will execute
   document.getElementById('addProductForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     console.log(data);
-    
-    const response = await fetch('http://104.248.136.206:3000/products', {
+
+    const response = await fetch('http://localhost:3000/products', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,65 +50,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  // Edit Product Form
-  // document.getElementById('editProductForm').addEventListener('submit', async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData(e.target);
-  //   const data = Object.fromEntries(formData.entries());
-
-  //   const response = await fetch('http://104.248.136.206:3000/products', {
-  //     method: 'PATCH',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(data),
-  //   });
-
-  //   if (response.ok) {
-  //     alert('Product updated successfully!');
-  //   } else {
-  //     alert('Error updating product');
-  //   }
-  // });
-
-  // Add User Form
-  // document.getElementById('addUserForm').addEventListener('submit', async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData(e.target);
-  //   const data = Object.fromEntries(formData.entries());
-
-  //   const response = await fetch('yourAPIEndpoint/addUser', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(data),
-  //   });
-
-  //   if (response.ok) {
-  //     alert('User added successfully!');
-  //   } else {
-  //     alert('Error adding user');
-  //   }
-  // });
-
   // Edit User Form
   document.getElementById('editUserForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    //const {IsAdmin} = data;
-    //data.IsAdmin= false;
-    //console.log(data);
-    if(data.isAdmin=="on"){
-      data.isAdmin=true;
-    }
-    else{
-      data.isAdmin=false;
+
+    if (data.isAdmin == "on") {
+      data.isAdmin = true;
+    } else {
+      data.isAdmin = false;
     }
     console.log(data);
 
-    const response = await fetch('http://104.248.136.206:3000/users', {
+    const response = await fetch('http://localhost:3000/users', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -119,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     e.preventDefault();
     const username = document.getElementById('deleteUserId').value;
 
-    const response = await fetch(`http://104.248.136.206:3000/users/username/${username}`, {
+    const response = await fetch(`http://localhost:3000/users/username/${username}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -133,9 +97,4 @@ document.addEventListener('DOMContentLoaded', async () => {
       alert('Error deleting user');
     }
   });
-}
-else{
-  alert("You are not an Admin. To make changes you have to sign in as an admin, otherwise no function here will work");
-}
 });
-

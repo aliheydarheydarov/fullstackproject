@@ -13,7 +13,7 @@ getData().then(async (data) => {
     try {
       const { userId } = await verifyToken(localStorage.getItem('accessToken'));
   
-      const response = await fetch(`http://104.248.136.206:3000/baskets/${userId}`, {
+      const response = await fetch(`http://localhost:3000/baskets/${userId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
