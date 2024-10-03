@@ -44,7 +44,7 @@ app.use("/baskets",basketRouter);
 
 
 
-  app.listen(port, '104.248.136.206',  () => {
+  app.listen(port,  () => {
     console.log(`Example app listening on port ${port}`);
   });
 
