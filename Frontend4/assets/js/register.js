@@ -54,7 +54,7 @@ registerForm.addEventListener("submit", function (e) {
     password,
   };
 
-  fetch('http://localhost:3000/users/register', {
+  fetch('http://104.248.136.206:3000/users/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

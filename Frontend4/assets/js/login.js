@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
           password: passInp.value,
       };
 
-      fetch('http://localhost:3000/users/login', {
+      fetch('http://104.248.136.206:3000/users/login', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',

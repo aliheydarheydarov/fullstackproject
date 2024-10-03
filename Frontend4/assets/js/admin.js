@@ -35,10 +35,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const data = Object.fromEntries(formData.entries());
     console.log(data);
 
-    const response = await fetch('http://localhost:3000/products', {
+    const response = await fetch('http://104.248.136.206:3000/products', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(data),
     });
@@ -63,10 +64,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     console.log(data);
 
-    const response = await fetch('http://localhost:3000/users', {
+    const response = await fetch('http://104.248.136.206:3000/users', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+
       },
       body: JSON.stringify(data),
     });
@@ -83,10 +86,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     e.preventDefault();
     const username = document.getElementById('deleteUserId').value;
 
-    const response = await fetch(`http://localhost:3000/users/username/${username}`, {
+    const response = await fetch(`http://104.248.136.206:3000/users/username/${username}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+
       },
     });
 
