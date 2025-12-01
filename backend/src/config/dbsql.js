@@ -7,10 +7,10 @@
 // });
 const mysql = require('mysql2');
 const connection = mysql.createConnection({
-  host: 'mysql-9a3a5b2-eliheyderheyderov0-59f2.i.aivencloud.com', 
-  user: 'avnadmin',
-  password: 'AVNS_3hYhdEa8jI9LDnYqo56',
-  database: 'defaultdb',
+  host: 'aivencloud', 
+  user: 'username',
+  password: 'password',
+  database: 'db',
   port: 21678,
 });
 
